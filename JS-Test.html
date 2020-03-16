@@ -1,0 +1,91 @@
+<html>
+
+<body>
+    <div id="root"></div>
+    <script>
+    let acctData = [
+  {
+    acctNum: "AAA - 1234",
+    user: "Alice"
+  },
+  {
+    acctNum: "AAA - 5231",
+    user: "Bob"
+  },
+  {
+    acctNum: "AAA - 9921",
+    user: "Alice"
+  },
+  {
+    acctNum: "AAA - 8191",
+    user: "Alice"
+  }
+];
+let balance = {
+  "AAA - 1234": 4593.22,
+  "AAA - 9921": 0,
+  "AAA - 5231": 232142.5,
+  "AAA - 8191": 4344
+};
+var el = document.getElementById("root");
+function sortFun(a, b) {
+  // if we want use asc and desc toggle need to set boolean value 'checkAsc' inside a toggle function
+  let checkAsc = true;
+  if (checkAsc) {
+    if (a > b) {
+      return 1;
+    } else if (a < b) {
+      return -1;
+    }
+    return 0;
+  } else {
+    if (a > b) {
+      return -1;
+    } else if (a < b) {
+      return 1;
+    }
+    return 0;
+  }
+}
+// Answer 1
+let arrData = acctData.map(val => {
+  return val.user;
+});
+el.innerHTML = JSON.stringify(arrData.sort(sortFun));
+console.log("Answer-1", arrData.sort(sortFun));
+
+// Answer 2
+function searchByName(nameKey, arraydata) {
+  let checkName;
+  let arra = []
+  arraydata.map(resData => {
+    if (resData.user === nameKey) {
+    checkName =  arra.push(resData);
+    }
+  })
+  if (checkName) {
+    return arra;
+  } else {
+    return "This user does not exist";
+  }
+}
+
+// Answer 2: a)
+var resultBobObject = searchByName("Bob", acctData);
+console.log("Answer-2 (a: filtered by Bob):", resultBobObject);
+
+// Answer 2: b)
+var resultCharlieObject = searchByName("Charlie", acctData);
+console.log("Answer-2 (b: filtered by Charlie):", resultCharlieObject);
+
+// Answer 2: c)
+console.log("Answer-2 (c: sorted by acctNum):", arrData.sort(sortFun));
+
+// Answer 2: b)
+var resultCharlieObject = searchByName("Alice", acctData);
+console.log("Answer-2 (b: filtered by Charlie):", resultCharlieObject);
+
+</script>
+</body>
+
+</html>
